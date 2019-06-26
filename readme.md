@@ -1,3 +1,9 @@
+This is my summary of the  of the course RX Kotlin by raywenderlich.com. I use it while learning and as quick reference. It is not intended to be an standalone substitution of the course so if you really want to learn the concepts here presented, buy the course and use this repository as a reference and guide.
+
+If you are the publisher and think this repository should not be public, just write me an email at hugomatilla [at] gmail [dot] com and I will make it private.
+
+Contributions: Issues, comments and pull requests are welcome 😃 
+
 # RXKotlin
 - [RXKotlin](#RXKotlin)
 - [1. RXKotlin Basics](#1-RXKotlin-Basics)
