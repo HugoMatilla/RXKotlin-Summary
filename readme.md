@@ -893,12 +893,12 @@ Same as reduce but with intermidiate results
 
 <img width="300" src="http://reactivex.io/documentation/operators/images/scan.png" >
 
-_Reduce_
+_Scan_
 
 ```kotlin
 subscriptions.add(
     Observable.fromIterable(runtimes.values)
-            .reduce { a, b -> a + b }
+            .scan { a, b -> a + b }
             .subscribeBy(onSuccess = {println(stringFrom(it))})
         )
 ```
@@ -967,8 +967,7 @@ val subscription = EONET.fetchCategories()
 disposables.add(subscription)
 ```
 
-## 5. 2 Concat
-Download in sequence
+## 5. 2 Concat: Download in sequence
 ```kotlin
 fun fetchEvents(forLastDays: Int = 360): Observable<List<EOEvent>> {
     val openEvents = events(forLastDays, false)
@@ -1010,4 +1009,19 @@ val updatedCategories =
         cat
       }
     }
+```
+## 5. 4  Merge: Download in parallel
+```kotlin
+  fun fetchEvents(category: EOCategory, forLastDays: Int = 360): Observable<List<EOEvent>> {
+    val openEvents = events(forLastDays, false, category.endpoint)
+    val closedEvents = events(forLastDays, true, category.endpoint)
+    return Observable.merge(openEvents, closedEvents)
+  }
+```
+```kotlin
+  val downloadedEvents = Observable.merge(eoCategories.flatMap { categories ->
+    Observable.fromIterable(categories.map { category ->
+        EONET.fetchEvents(category)
+    })
+}, 2) // Max Concurrency
 ```
